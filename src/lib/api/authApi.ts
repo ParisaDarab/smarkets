@@ -5,8 +5,9 @@ const {auth}=apiList
 
 import type { LoginRequest, LoginResponse } from "@/types/auth/auth";
 
+
 export function login(payload: LoginRequest) {
-  return apiClient<LoginResponse>(auth.createSession.method, {
+  return apiClient<LoginResponse>(auth.createSession.url, {
     method: "POST",
     body: JSON.stringify(payload),
   });
