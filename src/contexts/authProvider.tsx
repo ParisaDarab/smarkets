@@ -1,10 +1,12 @@
 import {
   createContext,
   useCallback,
+  useEffect,
   useMemo,
   useState,
   type ReactNode,
 } from 'react';
+import { UNAUTHORIZED_EVENT } from '@/api/apiClient';
 
 const STORAGE_KEY = 'smarkets_session_token';
 
@@ -43,9 +45,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const logout = useCallback(() => {
     try {
       window.localStorage.removeItem(STORAGE_KEY);
-    } catch {
-      // Ignore storage failures.
-    }
+    } catch {}
     setToken(null);
   }, []);
 
@@ -58,6 +58,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }),
     [token, login, logout]
   );
+
+  useEffect(() => {
+    window.addEventListener(UNAUTHORIZED_EVENT, logout);
+    return () => window.removeEventListener(UNAUTHORIZED_EVENT, logout);
+  }, [logout]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

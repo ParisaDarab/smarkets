@@ -4,16 +4,14 @@ import { CustomInput } from '@/components/input';
 import { Button } from '@/shadcn/components/ui/button';
 import { login, buttons, inputs } from '@/lib/i18n/en';
 import { useAuth } from '@/hooks/useAuth';
-import { useLogin } from '@/hooks/useLogin';
-import { ApiError } from '@/lib/api/apiClient';
+import { useLogin } from '@/hooks/auth/useLogin';
+import { ApiError } from '@/api/apiClient';
 import { validateEmail, validatePassword } from '@/lib/validation/validation';
 import { PasswordRequirements } from '@/components/PasswordRequirements';
-
 export const Login = () => {
   const navigate = useNavigate();
   const { login: setSession } = useAuth();
   const loginMutation = useLogin();
-
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [submitted, setSubmitted] = useState(false);
@@ -60,7 +58,7 @@ export const Login = () => {
   return (
     <div className="h-screen overflow-hidden">
       <div className="p-7 shadow-lg bg-white">
-        <div className="w-28">
+        <div className="w-36">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 144 32"
@@ -119,7 +117,7 @@ export const Login = () => {
       </div>
 
       <section className="py-3 flex flex-col justify-center gap-10 items-center w-full md:flex-row md:items-stretch">
-        <div className=" w-[80%] md:w-1/2 p-5">
+        <div className=" w-[80%] md:w-1/3 p-5">
           <form
             onSubmit={submitHandler}
             noValidate
@@ -151,6 +149,7 @@ export const Login = () => {
               required
             />
             <PasswordRequirements value={password} />
+            {formError && <p className="text-red-500 text-sm">{formError}</p>}
             <Button
               type="submit"
               className={`bg-smarketsGray h-12 ${!validateEmail(username) && !validatePassword(password) && 'bg-smarketsGreen'}`}

@@ -4,6 +4,9 @@
 // third-party trading API directly from client-side JS.
 const API_BASE_URL = '/api';
 
+export const UNAUTHORIZED_EVENT = 'smarkets:unauthorized';
+
+/** Shape of Smarkets' JSON error responses, e.g. {"error_type":"INVALID_CREDENTIALS","data":"..."} */
 type SmarketsErrorBody = {
   error_type?: string;
   data?: unknown;
@@ -47,6 +50,10 @@ export async function apiClient<T>(
   });
 
   if (!response.ok) {
+    if (response.status === 401) {
+      window.dispatchEvent(new Event(UNAUTHORIZED_EVENT));
+    }
+
     let message = `Request failed with status ${response.status}`;
     let errorType: string | undefined;
 
@@ -67,5 +74,16 @@ export async function apiClient<T>(
     return undefined as T;
   }
 
-  return response.json() as Promise<T>;
+  const data = (await response.json()) as T;
+
+  // Dev-only: prints every successful response straight to the console, so
+  // you can check the real shape of events/markets/contracts/quotes
+  // against the TypeScript types in types/markets/markets.ts without
+  // digging through DevTools Network tab rows one by one. Vite strips this
+  // whole block out of the production build automatically.
+  if (import.meta.env.DEV) {
+    // console.log(`[smarkets api] ${rest.method ?? 'GET'} ${endpoint}`, data);
+  }
+
+  return data;
 }

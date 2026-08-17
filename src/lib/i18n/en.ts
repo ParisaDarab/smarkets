@@ -13,8 +13,8 @@ const en = {
   // Generic field-level defaults, shared by CustomInput across whichever
   // form it's used in - separate from page-specific copy like `login`.
   inputs: {
-    emailPlaceholder: 'Email',
-    passwordPlaceholder: 'Password',
+    emailPlaceholder: 'name@example.com',
+    passwordPlaceholder: '••••••••',
   },
   login: {
     title: 'Sign in to Smarkets',
@@ -37,12 +37,21 @@ const en = {
     },
   },
   home: {
-    title: 'Featured events',
-    viewMarkets: 'View markets',
+    title: 'Sports',
+    liveMarketsTitle: 'Live now',
+    loading: 'Loading sports…',
+    error: 'Could not load sports.',
+    empty: 'No sports available right now.',
+    liveEmpty: 'Nothing is live right now - check back later.',
+    browse: 'Browse',
   },
   event: {
-    back: 'Back to events',
+    back: 'Back',
     markets: 'Markets',
+    loading: 'Loading…',
+    error: 'Could not load this page.',
+    empty: 'Nothing available here yet.',
+    browse: 'Browse',
   },
 } as const;
 

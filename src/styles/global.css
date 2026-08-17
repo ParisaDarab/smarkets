@@ -52,7 +52,9 @@
 }
 
 :root {
-    --grey-1: #d6d6d6;
+  --logo-primary:oklch(32.109% 0.00004 271.152);
+  --logo-accent:oklch(70.544% 0.15546 161.701);
+    --grey-1: oklch(87.61% 0.0001 271.152);
     --smarketsGreen:oklch(70.544% 0.15546 161.701);
     --smarketsBackground:#f4f4f4;
     --background: oklch(1 0 0);
