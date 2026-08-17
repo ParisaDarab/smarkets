@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CustomInput } from '@/components/input';
+import { CustomInput } from '@/components/Input';
 import { Button } from '@/shadcn/components/ui/button';
 import { login, buttons, inputs } from '@/lib/i18n/en';
 import { useAuth } from '@/hooks/useAuth';

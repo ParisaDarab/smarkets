@@ -1,10 +1,3 @@
-// Central map of Smarkets endpoints used by this app.
-//
-// Login/session management moved to Smarkets' newer /v0/ namespace, while
-// the market data endpoints (events/markets/contracts/quotes) are still
-// served from /v3/, which the API's own docs reference directly (see the
-// `url` example on the /v0/navigation/ response). Confirmed against
-// https://api.smarkets.com/v0/control/openapi/.
 const joinIds = (ids: string | string[]) =>
   Array.isArray(ids) ? ids.join(',') : ids;
 

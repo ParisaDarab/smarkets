@@ -1,17 +1,11 @@
-export type ContractQuoteSide = {
+export type ContractQuoteLevel = {
   price: number;
-  quantity?: number;
+  volume: number;
 };
 
 export type ContractQuote = {
-  contract_id?: string;
-  /** Best "back" price - the price at which a user could back this contract. */
-  bids?: ContractQuoteSide | null;
-  /** Best "lay" price - the price at which a user could lay this contract. */
-  offers?: ContractQuoteSide | null;
-  last_executed_price?: number | null;
+  bids: ContractQuoteLevel[];
+  offers: ContractQuoteLevel[];
 };
 
-export type QuotesResponse =
-  | { quotes: ContractQuote[] }
-  | { quotes: Record<string, ContractQuote> };
+export type QuotesResponse = Record<string, ContractQuote>;

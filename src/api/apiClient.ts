@@ -1,6 +1,9 @@
 // Requests are sent to a same-origin "/api" prefix, which Vite's dev
 // server proxies to https://api.smarkets.com (see vite.config.ts). This
 // sidesteps the browser CORS restriction we'd otherwise hit calling a
+
+import { humaniseErrorType } from "@/lib/i18n/errors";
+
 // third-party trading API directly from client-side JS.
 const API_BASE_URL = '/api';
 
@@ -24,9 +27,6 @@ export class ApiError extends Error {
   }
 }
 
-function humaniseErrorType(errorType: string): string {
-  return errorType.replaceAll('_', ' ').toLowerCase();
-}
 
 type ApiClientOptions = Omit<RequestInit, 'headers'> & {
   headers?: Record<string, string>;
@@ -82,7 +82,7 @@ export async function apiClient<T>(
   // digging through DevTools Network tab rows one by one. Vite strips this
   // whole block out of the production build automatically.
   if (import.meta.env.DEV) {
-    // console.log(`[smarkets api] ${rest.method ?? 'GET'} ${endpoint}`, data);
+    console.log(`[smarkets api] ${rest.method ?? 'GET'} ${endpoint}`, data);
   }
 
   return data;

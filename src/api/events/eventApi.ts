@@ -1,4 +1,4 @@
-import { headers } from "@/contexts/authProvider"
+
 import { apiClient } from "../apiClient"
 import { apiList } from "../apiList"
 import type { EventsResponse } from "@/types/event"

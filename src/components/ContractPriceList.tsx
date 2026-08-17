@@ -7,7 +7,6 @@ type ContractPriceListProps = {
   contracts: SmarketsContract[];
   quotes: Map<string, ContractQuote>;
 };
-
 export function ContractPriceList({
   marketName,
   contracts,

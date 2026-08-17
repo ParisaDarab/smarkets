@@ -8,6 +8,7 @@ export function priceToDecimalOdds(price: number): number {
   return 10000 / price;
 }
 
+
 export function priceToPercent(price: number): number {
   return price / 100;
 }
@@ -18,26 +19,17 @@ export function formatDecimalOdds(price: number | undefined | null): string {
 }
 
 /**
- * The quotes endpoint has been seen returning either an array of quotes
- * (each tagged with contract_id) or an object keyed by contract_id.
- * Normalise to a Map so the UI doesn't need to care which shape came back.
+ * Confirmed: the quotes response is keyed directly by contract_id at the
+ * root, e.g. {"314977223": {bids: [...], offers: [...]}, ...} - no
+ * wrapper key. This just turns that plain object into a Map for
+ * consistent lookup with .get(contractId).
  */
-export function normalizeQuotes(
-  response: QuotesResponse | undefined
-): Map<string, ContractQuote> {
+export function normalizeQuotes(response: QuotesResponse | undefined): Map<string, ContractQuote> {
   const map = new Map<string, ContractQuote>();
   if (!response) return map;
 
-  const { quotes } = response;
-
-  if (Array.isArray(quotes)) {
-    for (const quote of quotes) {
-      if (quote.contract_id) map.set(quote.contract_id, quote);
-    }
-  } else if (quotes && typeof quotes === 'object') {
-    for (const [contractId, quote] of Object.entries(quotes)) {
-      map.set(contractId, quote);
-    }
+  for (const [contractId, quote] of Object.entries(response)) {
+    map.set(contractId, quote);
   }
 
   return map;

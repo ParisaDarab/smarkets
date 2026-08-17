@@ -1,12 +1,14 @@
 import { formatDecimalOdds } from '@/lib/quotes';
 import { cn } from '@/shadcn/lib/utils';
-import type { ContractQuoteSide } from '@/types/quote';
+import type { ContractQuoteLevel } from '@/types/quote';
 type PriceCellProps = {
-  side: ContractQuoteSide | null | undefined;
+  levels: ContractQuoteLevel[] | undefined;
   tone: 'buy' | 'sell';
 };
 
-export default function PriceCell({ side, tone }: PriceCellProps) {
+export default function PriceCell({ levels, tone }: PriceCellProps) {
+  const best = levels?.[0];
+
   return (
     <span
       className={cn(
@@ -16,7 +18,7 @@ export default function PriceCell({ side, tone }: PriceCellProps) {
           : 'bg-rose-50 text-rose-900 dark:bg-rose-950/40 dark:text-rose-200'
       )}
     >
-      {formatDecimalOdds(side?.price)}
+      {formatDecimalOdds(best?.price)}
     </span>
   );
 }
