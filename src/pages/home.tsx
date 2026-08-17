@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { AppHeader } from '@/components/AppHeader';
 import { ContractPriceList } from '@/components/ContractPriceList';
 import { useEvents } from '@/hooks/events/useEvents';
