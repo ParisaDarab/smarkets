@@ -1,5 +1,5 @@
 import { AppHeader } from '@/components/AppHeader';
-import { ContractPriceList } from '@/components/ContractPriceList';
+import ContractPriceList from '@/components/ContractPriceList';
 import { useEvents } from '@/hooks/events/useEvents';
 import { useMarketsForEvents } from '@/hooks/markets/useMarkets';
 import { useQuotes } from '@/hooks/quotes/useQuotes';
@@ -11,7 +11,7 @@ import { EventCard } from '@/components/EventCard';
 import type { SmarketsMarket } from '@/types/market';
 import type { SmarketsEvent } from '@/types/event';
 import { SpinnerCustom } from '@/components/Loading';
-import { EmptyList } from '@/components/emptyList';
+import { EmptyList } from '@/components/EmptyList';
 
 const FEATURED_LIVE_COUNT = 4;
 const LOAD_MORE_BATCH = 8;
@@ -124,7 +124,9 @@ export const Home = () => {
           {!liveQuery.isLoading && featuredMarkets.length === 0 && (
             <EmptyList />
           )}
-
+          {liveQuery.isError && (
+            <p className="text-sm text-destructive">{home.error}</p>
+          )}
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {featuredMarkets.map((fm, index) => {
               const contracts = contractsQueries[index]?.data?.contracts ?? [];

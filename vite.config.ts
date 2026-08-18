@@ -1,18 +1,26 @@
 import tailwindcss from '@tailwindcss/vite';
+import { defineConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react-swc';
 import path from 'node:path';
-import { defineConfig } from 'vite';
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-
   resolve: {
     alias: {
-      '@': path.resolve('./src'),
+      '@': path.resolve(__dirname, './src'),
     },
   },
-
-  server: {
+  test: {
+    environment: 'jsdom',
+    globals: true,
+    setupFiles: ['./src/test/setup.ts'],
+    exclude: [
+    '**/node_modules/**',
+    '**/dist/**',
+    '**/src/test/e2e/**',
+  ],
+  },
+    server: {
     proxy: {
       '/api': {
         target: 'https://api.smarkets.com',

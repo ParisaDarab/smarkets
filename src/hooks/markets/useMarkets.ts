@@ -13,6 +13,7 @@ export function useMarkets(eventId: string | undefined) {
   });
 }
 
+
 export function useMarketsForEvents(eventIds: string[]) {
   const { token } = useAuth();
 
