@@ -79,8 +79,6 @@ describe('Login integration', () => {
     await waitFor(() => {
       expect(localStorage.getItem('smarkets_session_token')).toBe('token');
     });
-    console.log('TOKENnn:', localStorage.getItem('smarkets_session_token'));
-
     expect(await screen.findByText(/Live now/i)).toBeInTheDocument();
   });
 

@@ -3,6 +3,7 @@ export type SmarketsEvent = {
   name: string;
   slug?: string;
   full_slug?: string;
+  created?:string;
   type?: string;
   state: string;
   parent_id?: string | null;

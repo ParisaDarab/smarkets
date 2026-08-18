@@ -22,14 +22,11 @@ export const handlers = [
   http.post(
     `${API_BASE}/v3/sessions/`,
     async ({ request }) => {
-      console.log('✅ SESSION HANDLER HIT');
 
       const body = (await request.json()) as {
         username: string;
         password: string;
       };
-
-      console.log('✅ SESSION BODY:', body);
 
       const isValid =
         body.username === TEST_CREDENTIALS.username &&
@@ -60,12 +57,6 @@ export const handlers = [
     const url = new URL(request.url);
     const state = url.searchParams.get('state');
 
-    console.log(
-      '✅ EVENTS HANDLER HIT:',
-      url.pathname,
-      url.search
-    );
-
     return HttpResponse.json({
       events: mockEvents,
       pagination: {
@@ -81,12 +72,6 @@ export const handlers = [
     `${API_BASE}/v3/events/:eventId/markets/`,
     ({ params }) => {
       const eventId = String(params.eventId);
-
-      console.log(
-        '✅ MARKETS HANDLER HIT:',
-        eventId
-      );
-
       return HttpResponse.json({
         markets: mockMarkets[eventId] ?? [],
       });
@@ -101,11 +86,6 @@ export const handlers = [
     ({ params }) => {
       const marketId = String(params.marketId);
 
-      console.log(
-        '✅ CONTRACTS HANDLER HIT:',
-        marketId
-      );
-
       return HttpResponse.json({
         contracts: mockContracts[marketId] ?? [],
       });
@@ -119,12 +99,6 @@ http.get(
   `${API_BASE}/v3/markets/:marketIds/quotes/`,
   ({ params }) => {
     const marketIds = String(params.marketIds);
-
-    console.log(
-      '✅ QUOTES HANDLER HIT:',
-      marketIds
-    );
-
     return HttpResponse.json(mockQuotes);
   }
 ),
