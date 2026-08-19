@@ -137,3 +137,46 @@
     @apply font-sans;
     }
 }
+
+
+.live-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: sans-serif;
+  font-weight: bold;
+  color: #000000;
+}
+
+.live-dot {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  background-color:var(--smarketsGreen); 
+  border-radius: 50%;
+}
+
+/* The pulsing outer ring */
+.live-dot::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color:var(--smarketsGreen);
+  border-radius: 50%;
+  animation: pulse-ring 1.5s cubic-bezier(0.45, 0, 0.4, 1) infinite;
+}
+
+/* Seamless pulse keyframes */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(2.8);
+    opacity: 0;
+  }
+}

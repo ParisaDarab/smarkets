@@ -82,7 +82,8 @@ export const Home = () => {
       <AppHeader />
       <main className="mx-auto max-w-[80%] px-4 py-6">
         <section>
-          <h2 className="mb-4 text-lg font-semibold text-foreground">
+          <h2 className="mb-4 text-lg font-semibold text-foreground live-status">
+            <span className="live-dot"></span>
             {home.liveMarketsTitle}
           </h2>
 
