@@ -4,6 +4,7 @@ import { Home } from './pages/home';
 import { Event } from './pages/event';
 import { ProtectedRoute } from './routes/authProtected';
 import { ScrollToTop } from './components/ScrollTop';
+import NotFound from './components/NotFound';
 export const App = () => {
   return (
     <>
@@ -25,6 +26,7 @@ export const App = () => {
             </ProtectedRoute>
           }
         />
+        <Route path="*" element={<NotFound />} />
       </Routes>
 
       <ScrollToTop />
